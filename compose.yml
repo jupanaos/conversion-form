@@ -1,0 +1,20 @@
+services:
+  api:
+    container_name: api
+    build: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+      - /app/vendor
+
+  client:
+    container_name: client
+    build: ./client
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - api
