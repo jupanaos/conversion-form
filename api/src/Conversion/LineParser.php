@@ -2,7 +2,6 @@
 
 namespace App\Conversion;
 
-use App\Conversion\SourceEntryDto;
 use App\Exception\InvalidLineException;
 
 class LineParser
@@ -11,41 +10,41 @@ class LineParser
     {
         $columns = array_map('trim', explode(';', $line));
 
-        if (count($columns) !== 9) {
+        if (9 !== count($columns)) {
             throw new InvalidLineException($lineNumber, 'Nombre de colonnes invalide (9 attendues)');
         }
         [$journal, $date, $account, $subaccount, $reference, $label, $debit, $credit] = $columns;
 
-        if ($journal === '') {
+        if ('' === $journal) {
             throw new InvalidLineException($lineNumber, 'Journal vide');
         }
 
-        if ($reference === '') {
+        if ('' === $reference) {
             throw new InvalidLineException($lineNumber, 'Référence vide');
         }
 
-        if ($account === '') {
+        if ('' === $account) {
             throw new InvalidLineException($lineNumber, 'Compte vide');
         }
 
-        if ($debit === '') {
+        if ('' === $debit) {
             throw new InvalidLineException($lineNumber, 'Montant de débit vide');
         }
 
-        if ($credit === '') {
+        if ('' === $credit) {
             throw new InvalidLineException($lineNumber, 'Montant de crédit vide');
         }
 
         $dateTime = \DateTimeImmutable::createFromFormat('d/m/Y', $date);
         if (!$dateTime || $dateTime->format('d/m/Y') !== $date) {
-            throw new \App\Exception\InvalidLineException($lineNumber, 'Date invalide ou mal formatée');
+            throw new InvalidLineException($lineNumber, 'Date invalide ou mal formatée');
         }
 
         if (!preg_match('/^\d+\.\d{2}$/', $debit)) {
-            throw new \App\Exception\InvalidLineException($lineNumber, 'Montant de débit invalide');
+            throw new InvalidLineException($lineNumber, 'Montant de débit invalide');
         }
         if (!preg_match('/^\d+\.\d{2}$/', $credit)) {
-            throw new \App\Exception\InvalidLineException($lineNumber, 'Montant de crédit invalide');
+            throw new InvalidLineException($lineNumber, 'Montant de crédit invalide');
         }
 
         return new SourceEntryDto(

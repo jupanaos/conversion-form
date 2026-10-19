@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit;
 
-use App\Exception\InvalidLineException;
 use App\Conversion\LineParser;
+use App\Exception\InvalidLineException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -68,18 +68,18 @@ class LineParserTest extends TestCase
     public static function invalidLines(): iterable
     {
         yield 'trop peu de colonnes' => ['V1;04/05/2026;411000;', 'colonnes'];
-        yield 'date invalide'        => ['V1;31/02/2026;411000;CLI001;F123;Lib;1.00;0.00;', 'Date'];
-        yield 'date mal formatée'    => ['V1;2026-05-04;411000;CLI001;F123;Lib;1.00;0.00;', 'Date'];
+        yield 'date invalide' => ['V1;31/02/2026;411000;CLI001;F123;Lib;1.00;0.00;', 'Date'];
+        yield 'date mal formatée' => ['V1;2026-05-04;411000;CLI001;F123;Lib;1.00;0.00;', 'Date'];
         yield 'montant sans décimales' => ['V2;04/05/2026;411000;CLI001;F123;Lib;100;0.00;', 'Montant'];
         yield 'montant avec virgule' => ['V2;04/05/2026;411000;CLI001;F123;Lib;1,00;0.00;', 'Montant'];
-        yield 'journal vide'         => [';04/05/2026;411000;CLI001;F123;Lib;1.00;0.00;', 'Journal'];
-        yield 'pièce vide'           => ['V2;04/05/2026;411000;CLI001;;Lib;1.00;0.00;', 'Référence'];
-        yield 'journal en espaces'     => ['   ;04/05/2026;411000;CLI001;F123;Lib;1.00;0.00;', 'Journal vide'];
-        yield 'compte vide'         => ['V2;04/05/2026;;CLI001;F123;Lib;1.00;0.00;', 'Compte'];
-        yield 'débit vide'          => ['V2;04/05/2026;411000;CLI001;F123;Lib;;0.00;', 'débit'];
-        yield 'crédit vide'         => ['V2;04/05/2026;411000;CLI001;F123;Lib;1.00;;', 'crédit'];
-        yield 'montant négatif'     => ['V2;04/05/2026;411000;CLI001;F123;Lib;-1.00;0.00;', 'débit'];
-        yield 'trop de colonnes'    => ['V2;04/05/2026;411000;CLI001;F123;A;B;1.00;0.00;', 'colonnes'];
-        yield 'ligne blanche'       => ['', 'colonnes'];
+        yield 'journal vide' => [';04/05/2026;411000;CLI001;F123;Lib;1.00;0.00;', 'Journal'];
+        yield 'pièce vide' => ['V2;04/05/2026;411000;CLI001;;Lib;1.00;0.00;', 'Référence'];
+        yield 'journal en espaces' => ['   ;04/05/2026;411000;CLI001;F123;Lib;1.00;0.00;', 'Journal vide'];
+        yield 'compte vide' => ['V2;04/05/2026;;CLI001;F123;Lib;1.00;0.00;', 'Compte'];
+        yield 'débit vide' => ['V2;04/05/2026;411000;CLI001;F123;Lib;;0.00;', 'débit'];
+        yield 'crédit vide' => ['V2;04/05/2026;411000;CLI001;F123;Lib;1.00;;', 'crédit'];
+        yield 'montant négatif' => ['V2;04/05/2026;411000;CLI001;F123;Lib;-1.00;0.00;', 'débit'];
+        yield 'trop de colonnes' => ['V2;04/05/2026;411000;CLI001;F123;A;B;1.00;0.00;', 'colonnes'];
+        yield 'ligne blanche' => ['', 'colonnes'];
     }
 }
