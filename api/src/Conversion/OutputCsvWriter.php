@@ -25,41 +25,34 @@ class OutputCsvWriter
     /**
      * @param CsvRow[] $rows
      */
-    public function write(array $rows, string $outputFilePath): void
+    public function write(array $rows): string
     {
-        $fileHandle = fopen($outputFilePath, 'w');
-        if ($fileHandle === false) {
-            throw new \RuntimeException("Impossible d'ouvrir le fichier pour l'écriture : $outputFilePath");
-        }
-
-        fwrite($fileHandle, self::BOM);
-        $this->writeRow($fileHandle, self::HEADER);
+        $csv = self::BOM.$this->writeRow(self::HEADER);
 
         foreach ($rows as $row) {
-            $this->writeRow($fileHandle, $row->toArray());
+            $csv .= $this->writeRow($row->toArray());
         }
 
-        fclose($fileHandle);
+        return $csv;
     }
 
     /**
-     * fputcsv() would put quotes to any field containing a space
-     *
-     * @param resource $fileHandle
      * @param string[] $columns
      */
-    private function writeRow($fileHandle, array $columns): void
+    private function writeRow(array $columns): string
     {
-        fwrite($fileHandle, implode(self::SEPARATOR, array_map($this->escape(...), $columns)) . self::EOL);
+        return implode(self::SEPARATOR, array_map($this->escape(...), $columns)).self::EOL;
     }
 
-    /** Puts quote only when needed */
+    /**
+     * Puts quote only when needed.
+     */
     private function escape(string $field): string
     {
         if (!preg_match('/[;"\r\n]/', $field)) {
             return $field;
         }
 
-        return '"' . str_replace('"', '""', $field) . '"';
+        return '"'.str_replace('"', '""', $field).'"';
     }
 }
