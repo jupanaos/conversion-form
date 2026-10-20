@@ -65,6 +65,14 @@ class ConversionServiceTest extends TestCase
         $this->service->convert($this->line()."\r\n\r\nV1;colonnes manquantes\r\n");
     }
 
+    public function testHeaderLineInInputIsRejectedAsLineOne(): void
+    {
+        $this->expectException(InvalidLineException::class);
+        $this->expectExceptionMessageIsOrContains('Ligne 1');
+
+        $this->service->convert(self::HEADER.$this->line()."\r\n");
+    }
+
     public function testCrlfAndLfGiveTheSameOutput(): void
     {
         $lines = [$this->line(), $this->line('70600000', '')];

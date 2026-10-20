@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 class LineParserTest extends TestCase
 {
+    private const VALID_LINE = 'V1 ;04/05/2026;411000;41103176  ;12887                              ;AI17                               ;              587.34;                0.00;';
+
     private LineParser $parser;
 
     protected function setUp(): void
@@ -18,7 +20,7 @@ class LineParserTest extends TestCase
 
     public function testParsesValidLine(): void
     {
-        $entry = $this->parser->parse('V1 ;04/05/2026;411000;41103176  ;12887                              ;AI17                               ;              587.34;                0.00;', 1);
+        $entry = $this->parser->parse(self::VALID_LINE, 1);
 
         $this->assertSame('V1', $entry->journal);
         $this->assertSame('04/05/2026', $entry->date->format('d/m/Y'));
