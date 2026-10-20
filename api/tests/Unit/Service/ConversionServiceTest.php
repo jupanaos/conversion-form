@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Service;
 
 use App\Conversion\LineParser;
 use App\Conversion\OutputCsvWriter;
@@ -35,7 +35,7 @@ class ConversionServiceTest extends TestCase
 
     public function testSampleIsConvertedByteForByte(): void
     {
-        $fixtures = dirname(__DIR__).'/Fixtures';
+        $fixtures = dirname(__DIR__, 2).'/Fixtures';
 
         $this->assertSame(
             file_get_contents($fixtures.'/VENTE_FINAL.csv'),

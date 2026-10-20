@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Conversion;
 
 use App\Conversion\CsvRow;
 use App\Conversion\OutputCsvWriter;

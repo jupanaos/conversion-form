@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Conversion;
 
 use App\Conversion\LineParser;
 use App\Exception\InvalidLineException;
@@ -64,7 +64,6 @@ class LineParserTest extends TestCase
         $this->assertSame("VAL D'AUNIS  IMMO", $entry->label);
     }
 
-    // TODO : use InvalidException
     public static function invalidLines(): iterable
     {
         yield 'trop peu de colonnes' => ['V1;04/05/2026;411000;', 'colonnes'];
