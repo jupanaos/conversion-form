@@ -16,4 +16,5 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# Upload limit to 2 Mo
+CMD ["php", "-d", "display_errors=0", "-d", "upload_max_filesize=2M", "-d", "post_max_size=3M", "-S", "0.0.0.0:8000", "-t", "public"]
