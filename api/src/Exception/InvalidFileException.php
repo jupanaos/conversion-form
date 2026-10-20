@@ -4,9 +4,8 @@ namespace App\Exception;
 
 class InvalidFileException extends ConversionException
 {
-    public function __construct(
-        string $reason,
-    ) {
+    public function __construct(string $reason)
+    {
         parent::__construct($reason);
     }
 
