@@ -1,0 +1,18 @@
+<label for="txt-file-input" class="visually-hidden">Déposer un fichier .txt</label>
+<nz-upload
+  nzId="txt-file-input"
+  nzType="drag"
+  nzAccept=".txt"
+  [nzBeforeUpload]="beforeUpload"
+  [nzRemove]="onRemove"
+  [nzFileList]="fileList()"
+>
+  <p class="ant-upload-drag-icon">
+    <nz-icon nzType="inbox" />
+  </p>
+  <p class="ant-upload-text">Glisser déposer un fichier .txt dans cette zone</p>
+  <p class="ant-upload-hint">Un seul fichier .txt est accepté.</p>
+</nz-upload>
+<button type="button" class="convert-btn" [disabled]="!canConvert()" (click)="convert()">
+  {{ loading() ? 'Conversion…' : 'Convertir' }}
+</button>

@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { FileUploadComponent } from './file-upload/file-upload';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, FileUploadComponent],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {
-  protected readonly title = signal('client');
-}
+export class App {}
