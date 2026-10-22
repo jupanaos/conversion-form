@@ -23,7 +23,10 @@ class ConversionController extends AbstractController
     #[Route('', name: 'create', methods: ['POST'])]
     public function create(Request $request): Response
     {
-        $file = $this->validator->validate($request->files->get('file'));
+        $file = $this->validator->validate(
+            $request->files->get('file'),
+            $request->server->getInt('CONTENT_LENGTH'),
+        );
         $csv = $this->service->convert($file->getContent());
 
         return $this->responses->csv(

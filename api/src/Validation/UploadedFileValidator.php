@@ -16,9 +16,17 @@ class UploadedFileValidator
     ) {
     }
 
-    /** @throws ConversionException */
-    public function validate(mixed $file): UploadedFile
+    /**
+     * @param int $contentLength
+     *
+     * @throws ConversionException
+     */
+    public function validate(mixed $file, int $contentLength = 0): UploadedFile
     {
+        if (null === $file && $contentLength > $this->maxSize) {
+            throw new FileTooLargeException($this->maxSize);
+        }
+
         if (!$file instanceof UploadedFile) {
             throw new InvalidFileException('Le format du fichier n\'est pas valide.');
         }

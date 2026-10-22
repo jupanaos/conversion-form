@@ -24,7 +24,7 @@ class ConversionService
         }
 
         if ([] === $rows) {
-            throw new InvalidFileException('Le fichier ne contient aucune donnée.');
+            throw new InvalidFileException('Le fichier est vide.');
         }
 
         return $this->writer->write($rows);
