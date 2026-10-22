@@ -23,12 +23,13 @@ export class FileUploadComponent {
 
   protected readonly fileList = signal<NzUploadFile[]>([]);
   protected readonly loading = signal(false);
+  protected readonly status = signal('');
   protected readonly canConvert = computed(() => this.fileList().length > 0 && !this.loading());
 
   protected readonly beforeUpload = (file: NzUploadFile): boolean => {
     const error = validateFile(file as unknown as File);
     if (error) {
-      this.messageService.error(error);
+      this.notify('error', error);
       return false;
     }
     this.fileList.set([file]);
@@ -52,12 +53,17 @@ export class FileUploadComponent {
       .subscribe({
         next: (response) => {
           this.download(response, file.name);
-          this.messageService.success(`Le fichier ${file.name} a été converti avec succès.`);
+          this.notify('success', `Le fichier ${file.name} a été converti avec succès.`);
         },
         error: async (error: HttpErrorResponse) => {
-          this.messageService.error(await errorMessageFrom(error));
+          this.notify('error', await errorMessageFrom(error));
         },
       });
+  }
+
+  private notify(type: 'success' | 'error', text: string): void {
+    this.status.set(text);
+    this.messageService[type](text);
   }
 
   private download(response: HttpResponse<Blob>, sourceName: string): void {

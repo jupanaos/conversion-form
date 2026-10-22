@@ -1,1 +1,259 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light dark;
+
+  --background: light-dark(#99a0ff, #353755);
+  --secondary-background: light-dark(#fff, #1e1f29);
+  --foreground: light-dark(#353755, #ffffffde);
+  --main: #facc00;
+  --main-foreground: #000;
+  --border: light-dark(#000, #fff);
+  --danger: light-dark(#c4001d, #ff6b6e);
+  --success: light-dark(#00704f, #00d696);
+  --shadow: 4px 4px 0 0 #000;
+  --radius: 5px;
+  --border-width: 2px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  min-height: 100vh;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: light-dark(var(--foreground), #fff);
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+:focus-visible {
+  outline: 3px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+body .ant-upload.ant-upload-drag {
+  color: light-dark(var(--foreground), #fff);
+  background: var(--secondary-background);
+  border: var(--border-width) dashed var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s,
+    background 0.1s;
+}
+
+body .ant-upload.ant-upload-drag *,
+body .ant-upload.ant-upload-drag p.ant-upload-text,
+body .ant-upload.ant-upload-drag p.ant-upload-hint,
+body .ant-upload.ant-upload-drag .ant-upload-drag-icon .anticon {
+  color: inherit;
+}
+
+body .ant-upload.ant-upload-drag:hover,
+body .ant-upload.ant-upload-drag.ant-upload-drag-hover:not(.ant-upload-disabled) {
+  color: var(--main-foreground);
+  background: var(--main);
+  border-color: var(--main-foreground);
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+body .ant-upload-drag .ant-upload-text {
+  font-weight: 700;
+}
+
+body .ant-upload-list-item {
+  height: auto;
+  margin-top: 16px;
+  padding: 8px 12px;
+  color: var(--foreground);
+  background: var(--secondary-background);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+body .ant-upload-list-item * {
+  color: inherit;
+}
+
+body .ant-upload-list-item .ant-upload-list-item-name {
+  font-weight: 700;
+}
+
+body .ant-upload-list-item:hover .ant-upload-list-item-info {
+  background: transparent;
+}
+
+body .ant-upload-list-item-card-actions-btn:hover .anticon {
+  color: var(--danger);
+}
+
+.convert-btn,
+body .ant-btn {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 24px;
+  padding: 12px 20px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--main-foreground);
+  background: var(--main);
+  border: var(--border-width) solid var(--main-foreground);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+
+.convert-btn:hover:not(:disabled),
+body .ant-btn:hover:not([disabled]) {
+  color: var(--main-foreground);
+  background: var(--main);
+  border-color: var(--main-foreground);
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.convert-btn:disabled {
+  color: var(--foreground);
+  background: var(--secondary-background);
+  border-color: var(--border);
+  box-shadow: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+body .ant-upload-list-item .ant-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 32px;
+  min-height: 32px;
+  margin: 0;
+  padding: 0 4px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+body .ant-switch {
+  min-width: 56px;
+  height: 32px;
+  background: var(--secondary-background);
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+body .ant-switch.ant-switch-checked {
+  background: var(--main);
+}
+
+body .ant-switch .ant-switch-handle {
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 22px;
+  height: 22px;
+}
+
+body .ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 22px - 3px);
+}
+
+body .ant-switch .ant-switch-handle::before {
+  background: var(--foreground);
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+body .ant-switch.ant-switch-checked .ant-switch-handle::before {
+  background: var(--main-foreground);
+}
+
+/* Toasts */
+body .ant-message-notice-content {
+  padding: 12px 16px;
+  font-weight: 700;
+  color: var(--foreground);
+  background: var(--secondary-background);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+body .ant-message-error .anticon {
+  color: var(--danger);
+}
+
+body .ant-message-success .anticon {
+  color: var(--success);
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  body .ant-upload-list-item {
+    padding: 6px 8px;
+  }
+
+  body .ant-message-notice-content {
+    max-width: calc(100vw - 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+
+  body .ant-upload.ant-upload-drag:hover,
+  body .ant-upload.ant-upload-drag.ant-upload-drag-hover:not(.ant-upload-disabled),
+  .convert-btn:hover:not(:disabled),
+  body .ant-btn:hover:not([disabled]) {
+    transform: none;
+  }
+}

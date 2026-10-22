@@ -1,21 +1,9 @@
-<style>
-  :host {
-    --bg-dark: #2b303a;
-  }
+<header class="topbar">
+  <label for="theme-switch">Mode sombre</label>
+  <nz-switch nzId="theme-switch" [ngModel]="dark()" (ngModelChange)="setDark($event)" />
+</header>
 
-  main {
-    width: 100%;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-  }
-</style>
-
-<main class="main">
-  <div>
-    <h1>Ajoutez un fichier</h1>
-    <app-file-upload></app-file-upload>
-  </div>
+<main>
+  <h1>Ajoutez un fichier</h1>
+  <app-file-upload />
 </main>
-
-<router-outlet />

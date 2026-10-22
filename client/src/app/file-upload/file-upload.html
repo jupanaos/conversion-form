@@ -16,3 +16,4 @@
 <button type="button" class="convert-btn" [disabled]="!canConvert()" (click)="convert()">
   {{ loading() ? 'Conversion…' : 'Convertir' }}
 </button>
+<p class="visually-hidden" role="status">{{ status() }}</p>

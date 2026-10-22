@@ -1,10 +1,12 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
+import { InboxOutline } from '@ant-design/icons-angular/icons';
+import { provideNzIcons } from 'ng-zorro-antd/icon';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
+    provideHttpClient(),
+    provideNzIcons([InboxOutline]),
+  ],
 };

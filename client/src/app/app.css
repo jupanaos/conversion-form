@@ -1,0 +1,19 @@
+.topbar,
+main {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+main {
+  padding-bottom: 24px;
+}
