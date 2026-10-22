@@ -73,7 +73,6 @@ class ConversionControllerTest extends WebTestCase
 
     public function testFileSentAsArrayReturns400(): void
     {
-        // file[] au lieu de file : ne doit pas produire une TypeError (500)
         $this->client->request('POST', self::URL, [], ['file' => [$this->upload('a.txt', 'x')]]);
 
         $this->assertError(400, 'invalid_file');
@@ -96,6 +95,13 @@ class ConversionControllerTest extends WebTestCase
     public function testFileOverSizeLimitReturns413(): void
     {
         $this->post($this->upload('gros.txt', str_repeat('a', self::MAX_SIZE + 1)));
+
+        $this->assertError(413, 'file_too_large');
+    }
+
+    public function testBodyOverPostMaxSizeReturns413(): void
+    {
+        $this->client->request('POST', self::URL, [], [], ['CONTENT_LENGTH' => 3 * 1024 * 1024 + 1]);
 
         $this->assertError(413, 'file_too_large');
     }

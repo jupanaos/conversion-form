@@ -86,6 +86,20 @@ class UploadedFileValidatorTest extends TestCase
         $this->validator->validate($this->upload('ventes.txt', str_repeat('a', self::MAX_SIZE + 1)));
     }
 
+    public function testMissingFileWithOversizedBodyIsReportedAsTooLarge(): void
+    {
+        $this->expectException(FileTooLargeException::class);
+
+        $this->validator->validate(null, self::MAX_SIZE + 1);
+    }
+
+    public function testMissingFileWithSmallBodyIsStillInvalid(): void
+    {
+        $this->expectException(InvalidFileException::class);
+
+        $this->validator->validate(null, 100);
+    }
+
     public function testExtensionIsCaseInsensitive(): void
     {
         $file = $this->upload('VENTE_ORIGINE.TXT', 'abc');
